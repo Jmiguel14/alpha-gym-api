@@ -1,0 +1,47 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+miguel: {
+  name: "Miguel",
+  email: "miguel@example.com",
+  phone: "1234567890",
+  address: "123 Main St, Anytown, USA",
+  city: "Anytown",
+  state: "CA",
+  zip: "12345"
+}
+# column: value
+#
+
+juan: {
+  name: "Juan",
+  email: "juan@example.com",
+  phone: "1234567890",
+  address: "123 Main St, Anytown, USA",
+  city: "Anytown",
+  state: "CA",
+  zip: "12345"
+}
+
+pedro: {
+  name: "Pedro",
+  email: "pedro@example.com",
+  phone: "1234567890",
+  address: "123 Main St, Anytown, USA",
+  city: "Anytown",
+  state: "CA",
+  zip: "12345"
+}
+
+jose: {
+  name: "Jose",
+  email: "jose@example.com",
+  phone: "1234567890",
+  address: "123 Main St, Anytown, USA",
+  city: "Anytown",
+  state: "CA",
+  zip: "12345"
+}

@@ -1,0 +1,44 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+protein: {
+  name: "Protein",
+  description: "Protein is a macronutrient that is essential for building and repairing tissues.",
+  purchase_price: 10.00,
+  sale_price: 15.00,
+  sku: "PROTEIN123",
+  quantity: 100
+}
+# column: value
+#
+creatinine: {
+  name: "Creatinine",
+  description: "Creatinine is a waste product that is filtered by the kidneys.",
+  purchase_price: 10.00,
+  sale_price: 15.00,
+  sku: "CREATININE123",
+  quantity: 100
+}
+
+chocolate_protein: {
+  name: "Chocolate Protein",
+  description: "Chocolate Protein is a protein powder that is delicious.",
+  purchase_price: 10.00,
+  sale_price: 15.00,
+  sku: "CHOCOLATE_PROTEIN123",
+  quantity: 100
+}
+
+vanilla_protein: {
+  name: "Vanilla Protein",
+  description: "Vanilla Protein is a protein powder that is delicious.",
+  purchase_price: 10.00,
+  sale_price: 15.00,
+  sku: "VANILLA_PROTEIN123",
+  quantity: 100
+}
+
+
