@@ -12,7 +12,7 @@ class ProductTest < ActiveSupport::TestCase
       description: "Protein is a macronutrient that is essential for building and repairing tissues.",
     )
     assert_not product.valid?
-    assert_equal product.errors.full_messages, ["Purchase price can't be blank", "Sale price can't be blank", "Sku can't be blank", "Quantity can't be blank", "Purchase price is not a number", "Sale price is not a number", "Quantity is not a number"]
+    assert_equal product.errors.full_messages, [ "Purchase price can't be blank", "Sale price can't be blank", "Sku can't be blank", "Quantity can't be blank", "Purchase price is not a number", "Sale price is not a number", "Quantity is not a number" ]
   end
 
   test "should validate numericality of attributes" do
@@ -27,23 +27,23 @@ class ProductTest < ActiveSupport::TestCase
     assert product.valid?
     product.purchase_price = -10.00
     assert_not product.valid?
-    assert_equal product.errors.full_messages, ["Purchase price must be greater than 0"]
+    assert_equal product.errors.full_messages, [ "Purchase price must be greater than 0" ]
     product.purchase_price = 0.00
     assert_not product.valid?
-    assert_equal product.errors.full_messages, ["Purchase price must be greater than 0"]
+    assert_equal product.errors.full_messages, [ "Purchase price must be greater than 0" ]
     product.purchase_price = 10.00
     assert product.valid?
     product.sale_price = -15.00
     assert_not product.valid?
-    assert_equal product.errors.full_messages, ["Sale price must be greater than 0"]
+    assert_equal product.errors.full_messages, [ "Sale price must be greater than 0" ]
     product.sale_price = 0.00
     assert_not product.valid?
-    assert_equal product.errors.full_messages, ["Sale price must be greater than 0"]
+    assert_equal product.errors.full_messages, [ "Sale price must be greater than 0" ]
     product.sale_price = 15.00
     assert product.valid?
     product.quantity = -100
     assert_not product.valid?
-    assert_equal product.errors.full_messages, ["Quantity must be greater than or equal to 0"]
+    assert_equal product.errors.full_messages, [ "Quantity must be greater than or equal to 0" ]
     product.quantity = 0
     assert product.valid?
     product.quantity = 100
@@ -61,7 +61,6 @@ class ProductTest < ActiveSupport::TestCase
     product = products(:protein)
     product.quantity = -100
     assert_not product.valid?
-    assert_equal product.errors.full_messages, ["Quantity must be greater than or equal to 0"]
+    assert_equal product.errors.full_messages, [ "Quantity must be greater than or equal to 0" ]
   end
-  
 end

@@ -10,7 +10,7 @@ sale_1: {
   client: miguel,
   seller: juan,
   total_amount: 120.00,
-  date: "2021-01-01",
+  date: "2025-03-01",
   status: "paid",
   payment_method: "cash"
 }
@@ -22,5 +22,5 @@ sale_2: {
   client: miguel,
   seller: gaby,
   total_amount: 200.00,
-  date: "2021-01-02"
+  date: "2025-03-02"
 }

@@ -9,5 +9,4 @@ class UserTest < ActiveSupport::TestCase
     user = users(:admin)
     assert_equal user, User.find(user.id)
   end
-
 end

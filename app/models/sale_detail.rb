@@ -7,5 +7,4 @@ class SaleDetail < ApplicationRecord
   validates :discount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :sale_id, presence: true
   validates :product_id, presence: true
-  
 end

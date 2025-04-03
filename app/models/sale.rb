@@ -3,8 +3,7 @@ class Sale < ApplicationRecord
   enum :payment_method, { cash: 0, card: 1, bank_transfer: 2 }
 
   belongs_to :client
-  belongs_to :seller, class_name: 'User'
+  belongs_to :seller, class_name: "User"
   has_many :sale_details
   has_many :products, through: :sale_details
-
 end

@@ -13,15 +13,15 @@ class User < ApplicationRecord
   has_many :clients, through: :sales
 
   def admin?
-    roles.include?('admin')
+    roles.include?("admin")
   end
 
   def seller?
-    roles.include?('seller')
+    roles.include?("seller")
   end
 
   def client?
-    roles.include?('client')
+    roles.include?("client")
   end
 
   def has_role?(role)
@@ -29,7 +29,9 @@ class User < ApplicationRecord
   end
 
   def total_sales_revenue
-    sales.sum(:total_amount)
+    current_beginning_of_month = Date.today.beginning_of_month
+    current_end_of_month = Date.today.end_of_month
+    sales.where(date: current_beginning_of_month..current_end_of_month).sum(:total_amount)
   end
 
   def total_products_purchase_price

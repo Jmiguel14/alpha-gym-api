@@ -13,11 +13,11 @@ ApplicationRecord.transaction do
     email: 'admin@example.com',
     password: 'password',
     name: 'Admin',
-    roles: ['admin'],
+    roles: [ 'admin' ],
     jti: '1234567890'
   )
-  
-  
+
+
   Client.create!(
     name: 'John Doe',
     email: 'john.doe@example.com',
@@ -27,8 +27,8 @@ ApplicationRecord.transaction do
     state: 'CA',
     zip: '12345'
   )
-  
-  
+
+
   Product.create!(
     name: 'Product 1',
     description: 'This is a test product',
@@ -37,8 +37,8 @@ ApplicationRecord.transaction do
     purchase_price: 50.00,
     sale_price: 150.00
   )
-  
-  
+
+
   Sale.create!(
     client_id: Client.first.id,
     seller_id: User.first.id,
@@ -48,7 +48,7 @@ ApplicationRecord.transaction do
     status: Sale.statuses[:pending],
     payment_method: Sale.payment_methods[:cash]
   )
-  
+
   SaleDetail.create!(
     sale_id: Sale.first.id,
     product_id: Product.first.id,
