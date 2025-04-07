@@ -10,4 +10,18 @@ class SalesController < ApplicationController
     sale = Sale.find(params[:id])
     render json: { sale: sale.as_json(include: [ sale_details: { include: [ :product ] }, seller: { only: [ :id, :name, :email, :roles ] } ]) }, status: :ok
   end
+
+  def update
+    sale = Sale.find(params[:id])
+    if sale.update(sale_params)
+      render json: { sale: sale.as_json(include: [ sale_details: { include: [ :product ] }, seller: { only: [ :id, :name, :email, :roles ] } ]) }, status: :ok
+    else
+      render json: { errors: sale.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def sale_params
+    params.require(:sale).permit(:name, :description, :total_amount, :payment_method, :status, :date, :client_id, :seller_id)
+  end
 end
