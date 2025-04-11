@@ -6,4 +6,9 @@ class Sale < ApplicationRecord
   belongs_to :seller, class_name: "User"
   has_many :sale_details
   has_many :products, through: :sale_details
+
+  validates :name, presence: true
+  validates :description, presence: true
+
+  accepts_nested_attributes_for :sale_details, allow_destroy: true
 end

@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   resources :users, only: [ :index, :show ]
   resources :products, only: [ :index, :create, :update, :destroy ]
   resources :sales, only: [ :index, :show, :create, :update ]
+  resources :clients, only: [ :index, :show, :create, :update, :destroy ]
 end
