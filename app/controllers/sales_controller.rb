@@ -2,13 +2,13 @@ class SalesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    sales = Sale.all.as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description ])
+    sales = Sale.all.as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description ], methods: [ :total_amount ])
     render json: { sales: sales }, status: :ok
   end
 
   def show
     sale = Sale.find(params[:id])
-    render json: { sale: sale.as_json(include: [ sale_details: { include: [ :product ] }, seller: { only: [ :id, :name, :email, :roles ] }, client: { only: [ :id, :name, :email ] } ]) }, status: :ok
+    render json: { sale: sale.as_json(methods: [ :total_amount ], include: [ sale_details: { include: [ :product ] }, seller: { only: [ :id, :name, :email, :roles ] }, client: { only: [ :id, :name, :email ] } ]) }, status: :ok
   end
 
   def create
