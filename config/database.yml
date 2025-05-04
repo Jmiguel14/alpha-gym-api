@@ -32,19 +32,20 @@ test:
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
-  primary:
-    <<: *default
-    # database: storage/production.sqlite3
-    host: aws-0-us-west-1.pooler.supabase.com
-    database: postgres
-    username: postgres.yoluffeifsfhvgqoeudy
-    password: Alph@Gym_00
-  cable:
-    <<: *default
-    host: aws-0-us-west-1.pooler.supabase.com
-    database: postgres
-    username: postgres.yoluffeifsfhvgqoeudy
-    password: Alph@Gym_00
+  <<: *default
+  host: aws-0-us-west-1.pooler.supabase.com
+  database: postgres
+  username: postgres.yoluffeifsfhvgqoeudy
+  password: Alph@Gym_00
+  # primary:
+  #   <<: *default
+  #   # database: storage/production.sqlite3
+  # cable:
+  #   <<: *default
+  #   host: aws-0-us-west-1.pooler.supabase.com
+  #   database: postgres
+  #   username: postgres.yoluffeifsfhvgqoeudy
+  #   password: Alph@Gym_00
   # cache:
   #   <<: *default
   #   database: storage/production_cache.sqlite3
