@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
     render json: {
       status: {
         code: 401,
-        message: 'Invalid login credentials.'
+        message: "Invalid login credentials."
       }
     }, status: :unauthorized
   end
@@ -16,12 +16,12 @@ class Users::SessionsController < Devise::SessionsController
 
   def respond_with(resource, _opt = {})
     if resource.persisted?
-      @token = request.env['warden-jwt_auth.token']
-      headers['Authorization'] = @token
+      @token = request.env["warden-jwt_auth.token"]
+      headers["Authorization"] = @token
 
       render json: {
         status: {
-          code: 200, message: 'Logged in successfully.',
+          code: 200, message: "Logged in successfully.",
           token: @token,
           data: {
             user: UserSerializer.new(resource).serializable_hash[:data][:attributes]
@@ -34,17 +34,17 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def respond_to_on_destroy
-    if request.headers['Authorization'].present?
-      jwt_payload = JWT.decode(request.headers['Authorization'].split.last,
+    if request.headers["Authorization"].present?
+      jwt_payload = JWT.decode(request.headers["Authorization"].split.last,
                                Rails.application.credentials.devise_jwt_secret_key!).first
 
-      current_user = User.find(jwt_payload['sub'])
+      current_user = User.find(jwt_payload["sub"])
     end
 
     if current_user
       render json: {
         status: 200,
-        message: 'Logged out successfully.'
+        message: "Logged out successfully."
       }, status: :ok
     else
       render json: {
