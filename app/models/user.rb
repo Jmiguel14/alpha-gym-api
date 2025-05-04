@@ -28,25 +28,23 @@ class User < ApplicationRecord
     roles.include?(role.to_s)
   end
 
-  def total_sales_revenue
-    current_beginning_of_month = Date.today.beginning_of_month
-    current_end_of_month = Date.today.end_of_month
-    sales.where(date: current_beginning_of_month..current_end_of_month).sum(:total_amount)
+  def net_profit(start_date = Date.today.last_month.beginning_of_month, end_date = Date.today.last_month.end_of_month)
+    (total_sales_revenue(start_date, end_date) - total_products_purchase_price(start_date, end_date)).to_f
   end
 
-  def total_products_purchase_price
+  def total_sales_revenue(start_date, end_date)
+    sales.where(date: start_date..end_date).sum(:total_amount)
+  end
+
+  def total_products_purchase_price(start_date, end_date)
     total_purchase_price = 0
-    sale_details.each do |sale_detail|
+    sale_details.joins(:sale).where(sales: { date: start_date..end_date }).each do |sale_detail|
       total_purchase_price += sale_detail.product.purchase_price * sale_detail.quantity
     end
     total_purchase_price
   end
 
-  def net_profit
-    total_sales_revenue - total_products_purchase_price
-  end
-
   def commission
-    net_profit * 0.2
+    (net_profit * 0.2).to_f
   end
 end

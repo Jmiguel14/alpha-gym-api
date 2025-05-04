@@ -12,7 +12,9 @@ class Sale < ApplicationRecord
 
   accepts_nested_attributes_for :sale_details, allow_destroy: true
 
-  def total_amount
-    sale_details.inject(0) { |sum, detail| sum + detail.total_price }
+  before_save :save_total_amount
+
+  def save_total_amount
+    self.total_amount = sale_details.inject(0) { |sum, detail| sum + detail.total_price }
   end
 end

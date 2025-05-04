@@ -52,15 +52,20 @@ class ProductTest < ActiveSupport::TestCase
 
   test "should update quantity of product" do
     product = products(:protein)
+
     product.quantity = 95
     product.save
+
     assert_equal product.quantity, 95
   end
 
   test "should not update quantity of product if it is negative" do
     product = products(:protein)
+
     product.quantity = -100
-    assert_not product.valid?
+    is_valid = product.valid?
+
+    assert_not is_valid
     assert_equal product.errors.full_messages, [ "Quantity must be greater than or equal to 0" ]
   end
 end

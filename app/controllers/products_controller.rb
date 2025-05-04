@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @products = Product.all
+    search = Product.sanitize_sql_like(params[:search] || "")
+    @products = Product.where("name ilike ?", "%#{search}%").order(:name)
     render json: @products, status: :ok
   end
 
