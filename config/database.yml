@@ -11,13 +11,13 @@ default: &default
 
 development:
   <<: *default
-  host: aws-0-us-west-1.pooler.supabase.com
-  database: postgres
-  username: postgres.yoluffeifsfhvgqoeudy
-  password: Alph@Gym_00
-  # database: alpha_development
-  # username: postgres
-  # host: localhost
+  # host: aws-0-us-west-1.pooler.supabase.com
+  # database: postgres
+  # username: postgres.yoluffeifsfhvgqoeudy
+  # password: Alph@Gym_00
+  database: alpha_development
+  username: postgres
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

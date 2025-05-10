@@ -8,7 +8,7 @@ sale_1: {
   name: "Sale 1",
   description: "Sale 1 description",
   client: miguel,
-  seller: juan,
+  seller_id: 3,
   total_amount: 120.00,
   date: "2025-03-01",
   status: "paid",
@@ -20,7 +20,7 @@ sale_2: {
   name: "Sale 2",
   description: "Sale 2 description",
   client: miguel,
-  seller: gaby,
+  seller_id: 3,
   total_amount: 200.00,
   date: "2025-03-02"
 }

@@ -21,6 +21,7 @@ juan: {
 # column: value
 
 gaby: {
+  id: 3,
   email: "gaby@example.com",
   encrypted_password: "password",
   jti: "1276867696",

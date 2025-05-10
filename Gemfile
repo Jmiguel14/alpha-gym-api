@@ -36,6 +36,7 @@ gem "thruster", require: false
 gem "rack-cors"
 
 gem "pg"
+gem "pry", "~> 0.15.0"
 gem "devise"
 gem "devise-jwt"
 gem "jsonapi-serializer"
