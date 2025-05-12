@@ -30,4 +30,17 @@ class SalesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal initial_stock - 2, product.quantity, "Product stock should be updated"
   end
+
+  test "should restore product stock when sale detail is destroyed" do
+    sale_detail = sale_details(:sale_detail_1)
+    product = sale_detail.product
+    initial_stock = product.quantity
+
+    delete "/sales/#{sale_detail.sale.id}", params: { id: sale_detail.id }.to_json, headers: @auth_headers
+
+    product.reload
+    assert_response :success
+    assert_equal JSON.parse(response.body)["message"], "Sale deleted successfully"
+    assert_equal initial_stock + sale_detail.quantity, product.quantity, "Product stock should be restored"
+  end
 end

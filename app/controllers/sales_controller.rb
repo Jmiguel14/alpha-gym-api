@@ -2,7 +2,12 @@ class SalesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    sales = Sale.all.as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description ], methods: [ :total_amount ])
+    search = Sale.sanitize_sql_like(params[:search] || "")
+    if current_user.admin?
+      sales = Sale.where("name ilike ?", "%#{search}%").order(:name).as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description ], methods: [ :total_amount ])
+    else
+      sales = Sale.where(seller_id: current_user.id).where("name ilike ?", "%#{search}%").order(:name).as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description ], methods: [ :total_amount ])
+    end
     render json: { sales: sales }, status: :ok
   end
 
@@ -24,6 +29,15 @@ class SalesController < ApplicationController
     sale = Sale.find(params[:id])
     if sale.update(sale_params)
       render json: { sale: sale.as_json(include: [ sale_details: { include: [ :product ] }, seller: { only: [ :id, :name, :email, :roles ] } ]) }, status: :ok
+    else
+      render json: { errors: sale.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    sale = Sale.find(params[:id])
+    if sale.destroy
+      render json: { message: "Sale deleted successfully" }, status: :ok
     else
       render json: { errors: sale.errors.full_messages }, status: :unprocessable_entity
     end

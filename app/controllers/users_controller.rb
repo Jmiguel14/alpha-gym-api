@@ -10,7 +10,10 @@ class UsersController < ApplicationController
       )
       render json: @users, status: :ok
     else
-      render json: { error: "Unauthorized" }, status: :unauthorized
+      @users = User.where(id: current_user.id).as_json(
+        only: [ :id, :name, :email, :roles ]
+      )
+      render json: @users, status: :ok
     end
   end
 

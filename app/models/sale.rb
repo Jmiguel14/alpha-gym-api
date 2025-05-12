@@ -4,7 +4,7 @@ class Sale < ApplicationRecord
 
   belongs_to :client
   belongs_to :seller, class_name: "User"
-  has_many :sale_details
+  has_many :sale_details, dependent: :destroy
   has_many :products, through: :sale_details
 
   validates :name, presence: true
