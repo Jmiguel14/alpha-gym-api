@@ -4,9 +4,9 @@ class SalesController < ApplicationController
   def index
     search = Sale.sanitize_sql_like(params[:search] || "")
     if current_user.admin?
-      sales = Sale.where("name ilike ?", "%#{search}%").order(:name).as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description ], methods: [ :total_amount ])
+      sales = Sale.where("name ilike ?", "%#{search}%").order(date: :desc).as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description, :date ], methods: [ :total_amount ])
     else
-      sales = Sale.where(seller_id: current_user.id).where("name ilike ?", "%#{search}%").order(:name).as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description ], methods: [ :total_amount ])
+      sales = Sale.where(seller_id: current_user.id).where("name ilike ?", "%#{search}%").order(date: :desc).as_json(only: [ :id, :total_amount, :created_at, :updated_at, :name, :description ], methods: [ :total_amount ])
     end
     render json: { sales: sales }, status: :ok
   end
