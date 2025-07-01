@@ -10,8 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_21_001006) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_29_161843) do
+  create_schema "auth"
+  create_schema "extensions"
+  create_schema "graphql"
+  create_schema "graphql_public"
+  create_schema "pgbouncer"
+  create_schema "realtime"
+  create_schema "storage"
+  create_schema "supabase_migrations"
+  create_schema "vault"
+
   # These are extensions that must be enabled in order to support this database
+  enable_extension "extensions.pg_stat_statements"
   enable_extension "pg_catalog.plpgsql"
 
   create_table "clients", force: :cascade do |t|
@@ -46,8 +57,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_001006) do
     t.decimal "total_price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_sale_details_on_product_id"
-    t.index ["sale_id"], name: "index_sale_details_on_sale_id"
+    t.index [ "product_id" ], name: "index_sale_details_on_product_id"
+    t.index [ "sale_id" ], name: "index_sale_details_on_sale_id"
   end
 
   create_table "sales", force: :cascade do |t|
@@ -62,8 +73,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_001006) do
     t.integer "payment_method", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_sales_on_client_id"
-    t.index ["seller_id"], name: "index_sales_on_seller_id"
+    t.index [ "client_id" ], name: "index_sales_on_client_id"
+    t.index [ "seller_id" ], name: "index_sales_on_seller_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,9 +88,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_001006) do
     t.string "name"
     t.string "jti", null: false
     t.string "roles", default: [], array: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["jti"], name: "index_users_on_jti", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.boolean "active", default: true
+    t.index [ "email" ], name: "index_users_on_email", unique: true
+    t.index [ "jti" ], name: "index_users_on_jti", unique: true
+    t.index [ "reset_password_token" ], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "sales", "users", column: "seller_id"

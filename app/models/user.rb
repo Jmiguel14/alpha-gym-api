@@ -28,6 +28,10 @@ class User < ApplicationRecord
     roles.include?(role.to_s)
   end
 
+  def inactive?
+    !active
+  end
+
   def net_profit(start_date, end_date)
     (total_sales_revenue(start_date, end_date) - total_products_purchase_price(start_date, end_date)).to_f
   end

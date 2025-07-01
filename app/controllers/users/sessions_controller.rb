@@ -12,10 +12,19 @@ class Users::SessionsController < Devise::SessionsController
     }, status: :unauthorized
   end
 
+  def respond_to_on_inactive
+    render json: {
+      status: {
+        code: 401,
+        message: "Your account is not active."
+      }
+    }, status: :unauthorized
+  end
+
   private
 
   def respond_with(resource, _opt = {})
-    if resource.persisted?
+    if resource.persisted? && resource.active?
       @token = request.env["warden-jwt_auth.token"]
       headers["Authorization"] = @token
 
@@ -28,6 +37,8 @@ class Users::SessionsController < Devise::SessionsController
           }
         }
       }, status: :ok
+    elsif resource.inactive?
+      respond_to_on_inactive
     else
       respond_to_on_failure
     end

@@ -4,7 +4,6 @@ class AddRolesToUser < ActiveRecord::Migration[8.0]
   end
 
   def up
-    User.update_all(roles: ['admin'])
+    User.update_all(roles: [ 'admin' ])
   end
- 
 end
